@@ -1,0 +1,14 @@
+5
+Apelido1 Time 1
+Apelido2 Time 2
+Apelido3 Time 3
+Apelido4 Time 4
+Apelido5 Time 5
+5
+Apelido1 10 x 12 Apelido2
+Apelido2 2 x 8 Apelido3
+Apelido3 1 x 2 Apelido1
+Apelido4 2 x 1 Apelido2
+Apelido5 6 x 6 Apelido3
+
+
