@@ -19,7 +19,6 @@ public abstract class SQLiteBaseRepository {
         }
     }
 
-
     public SQLiteBaseRepository() {
         inicializarBancoSeNecessario();
     }
@@ -38,17 +37,36 @@ public abstract class SQLiteBaseRepository {
 
                 System.out.println("Criando novo banco de dados e tabelas...");
 
-                // Criação da tabela "times"
-                String criarTabelaTimes = "CREATE TABLE IF NOT EXISTS times (" +
-                        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "apelido TEXT UNIQUE NOT NULL," +
+                // Criação da tabela "pacientes"
+                String criarTabelaPacientes = "CREATE TABLE IF NOT EXISTS pacientes (" +
+                        "cpf TEXT PRIMARY KEY," +
                         "nome TEXT NOT NULL," +
-                        "pontos INTEGER DEFAULT 0," +
-                        "golsMarcados INTEGER DEFAULT 0," +
-                        "golsSofridos INTEGER DEFAULT 0" +
+                        "dataNascimento TEXT," +
+                        "idade INTEGER," +
+                        "estado TEXT," +
+                        "cidade TEXT" +
                         ");";
+                stmt.execute(criarTabelaPacientes);
 
-                stmt.execute(criarTabelaTimes);
+                // Criação da tabela "testes"
+                String criarTabelaTestes = "CREATE TABLE IF NOT EXISTS testes (" +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "dataTeste TEXT," +
+                        "cpfPaciente TEXT," +
+                        "resultado TEXT," +
+                        "FOREIGN KEY (cpfPaciente) REFERENCES pacientes(cpf)" +
+                        ");";
+                stmt.execute(criarTabelaTestes);
+
+                // Criação da tabela "obitos"
+                String criarTabelaObitos = "CREATE TABLE IF NOT EXISTS obitos (" +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "dataObito TEXT," +
+                        "cpfPaciente TEXT," +
+                        "FOREIGN KEY (cpfPaciente) REFERENCES pacientes(cpf)" +
+                        ");";
+                stmt.execute(criarTabelaObitos);
+
             } catch (SQLException e) {
                 System.err.println("Erro ao inicializar o banco de dados: " + e.getMessage());
             }
