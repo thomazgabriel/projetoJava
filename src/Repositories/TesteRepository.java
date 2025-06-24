@@ -6,27 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TesteRepository extends SQLiteBaseRepository {
-
-    public TesteRepository() {
-        super();
-        inicializarTabela();
-    }
-
-    private void inicializarTabela() {
-        String sql = "CREATE TABLE IF NOT EXISTS testes (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "dataTeste TEXT," +
-                "cpfPaciente TEXT," +
-                "resultado TEXT" +
-                ");";
-        try (Connection conn = connect();
-             Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void inserir(TesteEntity teste) {
         String sql = "INSERT INTO testes (dataTeste, cpfPaciente, resultado) VALUES (?, ?, ?)";
         try (Connection conn = connect();

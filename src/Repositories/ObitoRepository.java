@@ -6,26 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ObitoRepository extends SQLiteBaseRepository {
-
-    public ObitoRepository() {
-        super();
-        inicializarTabela();
-    }
-
-    private void inicializarTabela() {
-        String sql = "CREATE TABLE IF NOT EXISTS obitos (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "dataObito TEXT," +
-                "cpfPaciente TEXT" +
-                ");";
-        try (Connection conn = connect();
-             Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void inserir(ObitoEntity obito) {
         String sql = "INSERT INTO obitos (dataObito, cpfPaciente) VALUES (?, ?)";
         try (Connection conn = connect();
